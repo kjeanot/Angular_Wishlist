@@ -18,32 +18,33 @@ export class AppComponent {
     new WishItem('Avoir le profil pour les offres d\'emploi', true),
     new WishItem('Etre embauché')
   ];
-  visibleItems : WishItem[] = this.items;
+
+  get visibleItems() : WishItem[] {
+    let filter = this.wishFilter;
+
+    if (filter === "0") {
+      return this.items;
+    } else if (filter === "1") {
+      return this.items.filter(item => item.isComplete);
+    } else {
+      return this.items.filter(item => !item.isComplete);
+    }
+  };
+
   title = 'My Angular wishlist';
+
   newWishText : string = '';
+
   wishFilter : String = '0';
-  handleFilterChange = (event: any) => {
-    this.wishFilter = event;
-    this.filterItems(this.wishFilter);
-  }
+
   toggleItem = (item : WishItem) => {
     item.isComplete = !item.isComplete;
     console.log(item);
   };
+
   addNewWish = () => {
     this.items.push(new WishItem(this.newWishText));
     this.newWishText = '';
-  }
-  filterItems = (selectedFilter : String) => {
-    switch(selectedFilter) {
-      case '0' :
-        this.visibleItems = this.items;
-        break;
-      case '1' :
-        this.visibleItems = this.items.filter(item => item.isComplete);
-        break;
-      case '2' :
-        this.visibleItems = this.items.filter(item => !item.isComplete)
-    }
-  }
+  };
+
 }
