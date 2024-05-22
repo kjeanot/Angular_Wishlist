@@ -12,25 +12,34 @@
       type="text"
       name="wish-input"
       id="wish-input"
-      class="form-control"
       [(ngModel)]="newWishText"
-
       >
       <input
         type="submit"
-        class="btn btn-primary"
         (click)="$event.preventDefault(); addNewWish()"
         >
   </label>
+  <label for="wish-state">
+    <select
+      name="wish-state"
+      id="wish-state"
+      [(ngModel)]="wishFilter"
+      (ngModelChange)="handleFilterChange($event)"
+      >
+      <option value="0">Tout</option>
+      <option value="1">Fait</option>
+      <option value="2">A faire</option>
+    </select>
+  </label>
 
   <div *ngIf="items.length === 0; else showItems">
-    <p>Pas d'item</p>
+    <p>Pas de tache en cours</p>
   </div>
     <ng-template #showItems>
       <ul *ngIf="items.length > 0" class="wish-list">
-        <li *ngFor="let item of items; index as i">
-          <div class="form-check">
-            <label class="form-check-label">
+        <li *ngFor="let item of visibleItems; index as i">
+          <div>
+            <label>
               <input
                 class="checkbox"
                 type="checkbox"
