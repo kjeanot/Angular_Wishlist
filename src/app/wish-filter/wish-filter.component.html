@@ -1,0 +1,12 @@
+<label for="wish-state">
+  <select
+    name="wish-state"
+    id="wish-state"
+    [(ngModel)]="wishFilter"
+    (ngModelChange)="changeFilter($event)"
+    >
+    <option value="0">Tout</option>
+    <option value="1">Fait</option>
+    <option value="2">A faire</option>
+  </select>
+</label>

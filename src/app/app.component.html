@@ -7,51 +7,24 @@
 
   <h1>{{title}}</h1>
 
-  <label for="wish-input">
-    <input
-      type="text"
-      name="wish-input"
-      id="wish-input"
-      [(ngModel)]="newWishText"
-      >
-      <input
-        type="submit"
-        (click)="$event.preventDefault(); addNewWish()"
-        >
-  </label>
-  <label for="wish-state">
-    <select
-      name="wish-state"
-      id="wish-state"
-      [(ngModel)]="wishFilter"
-      >
-      <option value="0">Tout</option>
-      <option value="1">Fait</option>
-      <option value="2">A faire</option>
-    </select>
-  </label>
 
-  <div *ngIf="items.length === 0; else showItems">
-    <p>Pas de tache en cours</p>
-  </div>
-    <ng-template #showItems>
-      <ul *ngIf="items.length > 0" class="wish-list">
-        <li *ngFor="let item of visibleItems; index as i">
-          <div>
-            <label>
-              <input
-                class="checkbox"
-                type="checkbox"
-                [checked]="item.isComplete"
-                [attr.data-index]="i"
-                (click)="toggleItem(item)"
-                >
-                {{item.wishText}}
-            </label>
-          </div>
-        </li>
-      </ul>
-    </ng-template>
+
+
+  <app-add-wish-form
+    (addWish)="items.push($event)"
+  >
+
+  </app-add-wish-form>
+
+  <app-wish-filter
+    (filter)="filter = $event"
+  ></app-wish-filter>
+
+  <wish-list
+    [items]="visibleItems"
+    >
+  </wish-list>
+
 
   </div>
 </main>

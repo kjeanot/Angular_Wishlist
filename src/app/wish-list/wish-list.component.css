@@ -1,0 +1,8 @@
+.wish-list {
+  list-style: none;
+  padding: 0;
+}
+
+.wish-list li {
+  margin-left: 0;
+}

@@ -1,0 +1,13 @@
+<label for="wish-input">
+  <input
+    type="text"
+    name="wish-input"
+    id="wish-input"
+    [(ngModel)]="newWishText"
+    >
+    <input
+      type="submit"
+      (click)="$event.preventDefault(); addNewWish()"
+      >
+</label>
+
