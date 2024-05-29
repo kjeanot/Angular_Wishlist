@@ -3,19 +3,10 @@
 </div>
 <ng-template #showItems>
   <ul *ngIf="items.length > 0" class="wish-list">
-    <li *ngFor="let item of items; index as i">
-      <div>
-        <label>
-          <input
-            class="checkbox"
-            type="checkbox"
-            [checked]="item.isComplete"
-            [attr.data-index]="i"
-            (click)="toggleItem(item)"
-            >
-            {{item.wishText}}
-        </label>
-      </div>
-    </li>
+    <wish-list-item
+    *ngFor="let wish of items"
+    [wishText]="wish.wishText"
+    [(fullfilled)]="wish.isComplete"
+    ></wish-list-item>
   </ul>
 </ng-template>
