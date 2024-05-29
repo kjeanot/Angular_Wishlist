@@ -16,12 +16,12 @@
 
   </app-add-wish-form>
 
-  <app-wish-filter
-    (filter)="filter = $event"
-  ></app-wish-filter>
+  <wish-filter
+    [(filter)]="filter"
+  ></wish-filter>
 
   <wish-list
-    [items]="visibleItems"
+    [items]="items.filter(filter)"
     >
   </wish-list>
 

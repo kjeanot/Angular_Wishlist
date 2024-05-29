@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter} from '@angular/core';
+import { Component, Output, EventEmitter, Input} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { WishItem } from '../../shared/models/wishItem';
 import { NgForOf } from '@angular/common';
@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-wish-filter',
+  selector: 'wish-filter',
   standalone: true,
   imports: [ FormsModule ],
   templateUrl: './wish-filter.component.html',
@@ -14,11 +14,12 @@ import { FormsModule } from '@angular/forms';
 })
 export class WishFilterComponent {
 
-  ngOnInit(): void {
-    this.filter.emit(this.filters[0])
-  }
+  @Input() filter: any;
+  @Output() filterChange = new EventEmitter<any>();
 
-  @Output() filter = new EventEmitter<any>();
+  ngOnInit(): void {
+    this.updateFilter('0');
+  }
 
   wishFilter : any = '0';
 
@@ -28,8 +29,9 @@ export class WishFilterComponent {
     (item : WishItem) => !item.isComplete
   ]
 
-  changeFilter(value : any) {
-    this.filter.emit(this.filters[value])
+  updateFilter(value : any) {
+    this.filter = this.filters[value];
+    this.filterChange.emit(this.filters[value])
   }
 
 }

@@ -25,7 +25,7 @@ export class AppComponent {
     new WishItem('Etre embauché')
   ];
 
-  filter: any = () => {};
+  filter: any;
 
   get visibleItems() : WishItem[] {
     return this.items.filter(this.filter)
