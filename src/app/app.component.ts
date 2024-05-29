@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { WishListComponent } from '../app/wish-list/wish-list.component';
 import { AddWishFormComponent } from '../app/add-wish-form/add-wish-form.component';
 import { WishFilterComponent } from '../app/wish-filter/wish-filter.component';
+import events from './../shared/services/EventService'
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,12 @@ import { WishFilterComponent } from '../app/wish-filter/wish-filter.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+
+  constructor() {
+    events.listen('removeWish', (wish: any) => {
+      console.log(wish);
+    })
+  }
 
   title = 'My Angular wishlist';
 

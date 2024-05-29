@@ -1,6 +1,6 @@
 <li>
   <div>
-    <label>
+    <label [ngClass]="cssClasses">
       <input
         class="checkbox"
         type="checkbox"
@@ -9,5 +9,6 @@
         >
         {{wishText}}
     </label>
+    <button type="button" (click)="removeWish()">x</button>
   </div>
 </li>
